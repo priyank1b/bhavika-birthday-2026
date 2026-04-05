@@ -1,0 +1,60 @@
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+
+function Countdown({ onNext }) {
+
+const [seconds, setSeconds] = useState(5)
+
+useEffect(() => {
+
+let timeLeft = 5
+
+const timer = setInterval(() => {
+
+timeLeft--
+
+setSeconds(timeLeft)
+
+if(timeLeft <= 0){
+clearInterval(timer)
+onNext()
+}
+
+},1000)
+
+return () => clearInterval(timer)
+
+}, [])
+
+return (
+
+<div className="h-full flex flex-col items-center justify-center">
+
+<motion.h1
+initial={{opacity:0, y:40}}
+animate={{opacity:1, y:0}}
+className="text-3xl text-pink-400"
+>
+
+Something Special is Coming 💖
+
+</motion.h1>
+
+<motion.h2
+key={seconds}
+initial={{scale:0}}
+animate={{scale:1}}
+className="text-6xl mt-5"
+>
+
+{seconds}
+
+</motion.h2>
+
+</div>
+
+)
+
+}
+
+export default Countdown
