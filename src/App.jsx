@@ -16,7 +16,7 @@ function App() {
   const [page, setPage] = useState(0)
   
   // THE GUARD: Change this to her actual birthday
-  const birthdayDate = new Date("April 05, 2026 20:50:00").getTime();
+  const birthdayDate = new Date("April 05, 2026 21:15:00").getTime();
   const now = new Date().getTime();
   const isBirthday = now >= birthdayDate;
 
