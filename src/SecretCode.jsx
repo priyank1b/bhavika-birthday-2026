@@ -9,7 +9,7 @@ const [error, setError] = useState("")
 
 const checkCode = () => {
 
-if(code === "01022026"){
+if(code === "07022026"){
 onNext()
 }else{
 setError("Wrong Date ❤️ Try again")
