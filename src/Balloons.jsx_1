@@ -1,0 +1,146 @@
+import { useState, useRef } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import popSound from "./assets/pop.mp3"
+
+const words = [
+"Every",
+"Moment",
+"With",
+"You",
+"Feels",
+"Special",
+"Happy",
+"Birthday",
+"My",
+"Love",
+"Bhavika",
+"❤️"
+]
+
+function Balloons({ onNext }) {
+
+const [popped, setPopped] = useState([])
+const [message, setMessage] = useState([])
+const [currentIndex, setCurrentIndex] = useState(0)
+const [burst, setBurst] = useState(null)
+
+const audioRef = useRef(new Audio(popSound))
+
+// Generate positions once
+const balloonPositions = useRef(
+words.map(() => ({
+x: Math.random() * window.innerWidth,
+y: 35 + Math.random() * 20,
+delay: Math.random() * 2
+}))
+)
+
+const popBalloon = (index, event) => {
+
+if(popped.includes(index)) return
+
+const x = event.clientX || event.touches?.[0]?.clientX
+const y = event.clientY || event.touches?.[0]?.clientY
+
+audioRef.current.currentTime = 0
+audioRef.current.play()
+
+setPopped(prev => [...prev, index])
+setBurst({x,y})
+
+setMessage(prev => [...prev, words[currentIndex]])
+setCurrentIndex(prev => prev + 1)
+
+if(currentIndex + 1 === words.length){
+setTimeout(()=>{
+onNext()
+},1500)
+}
+
+setTimeout(()=>{
+setBurst(null)
+},600)
+
+}
+
+return (
+
+<div className="h-full flex flex-col items-center justify-center">
+
+<h1 className="text-2xl text-pink-400 mb-6">
+Pop the Balloons 🎈
+</h1>
+
+<div className="relative w-full h-[60vh]">
+
+<AnimatePresence>
+
+{words.map((_, i)=> (
+
+!popped.includes(i) && (
+
+<motion.div
+key={i}
+onTouchStart={(e)=>popBalloon(i,e)}
+onClick={(e)=>popBalloon(i,e)}
+className="absolute cursor-pointer text-5xl select-none"
+initial={{
+y: "100vh",
+x: balloonPositions.current[i].x
+}}
+animate={{
+y: `${balloonPositions.current[i].y}vh`
+}}
+whileHover={{
+scale: 1.1
+}}
+exit={{
+scale:0.2,
+opacity:0
+}}
+transition={{
+duration: 2,
+delay: balloonPositions.current[i].delay
+}}
+>
+🎈
+</motion.div>
+
+)
+
+))}
+
+</AnimatePresence>
+
+{burst && (
+
+<motion.div
+className="absolute text-3xl"
+style={{
+left: burst.x,
+top: burst.y
+}}
+initial={{ scale: 0 }}
+animate={{ scale: 1.5, opacity: 0 }}
+transition={{ duration: 0.6 }}
+>
+💖
+</motion.div>
+
+)}
+
+</div>
+
+<div className="text-center mt-4 text-xl text-pink-300 px-6">
+
+{message.join(" ")}
+
+</div>
+
+</div>
+
+)
+
+}
+
+export default Balloons
