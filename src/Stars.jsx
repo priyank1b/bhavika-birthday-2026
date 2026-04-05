@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 function Stars({ currentPage }) {
-  const isFinalPage = currentPage === 7;
+  const isFinalPage = currentPage === 9;
 
   // Star coordinates for Virgo (unchanged)
   const virgoStars = [
