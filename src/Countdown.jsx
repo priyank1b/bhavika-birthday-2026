@@ -11,7 +11,7 @@ function Countdown({ onNext }) {
 
   useEffect(() => {
     // Set target date: April 27, 2026, 00:00:00
-    const targetDate = new Date("April 05, 2026 21:20:00").getTime()
+    const targetDate = new Date("April 05, 2026 21:27:00").getTime()
 
     const timer = setInterval(() => {
       const now = new Date().getTime()

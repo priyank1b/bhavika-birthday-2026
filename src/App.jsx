@@ -14,6 +14,21 @@ import Gift from "./Gift"         // New Component
 
 function App() {
   const [page, setPage] = useState(0)
+  
+  // THE GUARD: Change this to her actual birthday
+  const birthdayDate = new Date("April 05, 2026 21:27:00").getTime();
+  const now = new Date().getTime();
+  const isBirthday = now >= birthdayDate;
+
+  // This prevents her from skipping ahead via console/dev tools
+  const protectedSetPage = (newPage) => {
+    if (newPage > 0 && !isBirthday) {
+      alert("Nice try, developer! Wait for the stars to align. ✨");
+      setPage(0);
+    } else {
+      setPage(newPage);
+    }
+  };
 
   return (
     <div className="min-h-screen text-white relative bg-[#020617]">
@@ -22,7 +37,12 @@ function App() {
       <Music />
 
       <main className="relative z-10 h-screen w-full flex items-center justify-center">
-        {page === 0 && <Countdown onNext={() => setPage(1)} />}
+	  
+	  {page === 0 && <Countdown onNext={() => protectedSetPage(1)} />}
+	  
+	  {isBirthday && (
+          <>
+	  
         {page === 1 && <SecretCode onNext={() => setPage(2)} />}
         {page === 2 && <Envelope onNext={() => setPage(3)} />}
         {page === 3 && <Balloons onNext={() => setPage(4)} />}
@@ -36,6 +56,9 @@ function App() {
         
 
         {page === 9 && <FinalPage />}
+		
+		</>
+        )}
       </main>
     </div>
   )
