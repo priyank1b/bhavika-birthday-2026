@@ -25,7 +25,7 @@ function Gift({ onNext }) {
         transition={{ delay: 0.5 }}
         className="text-pink-300 italic mb-12"
       >
-        "Look outside your door... your real gift is waiting."
+        "Look inside your drower... your gift is waiting."
       </motion.p>
 
       <motion.div
