@@ -9,14 +9,23 @@ const [text, setText] = useState("")
 const [startTyping, setStartTyping] = useState(false)
 const [showNext, setShowNext] = useState(false)
 
-const fullText = `From the moment you came into my life,
-everything started feeling magical.
+const fullText = `Aaj main tumhe choose karta hoon, 
+isliye nahi ki zindagi hamesha easy hogi, 
+balki isliye kyunki main tumhare saath milke
+har situation ka saamna karna chahta hoon.
 
-Your smile brightens my days,
-your voice calms my heart,
-and your presence makes everything perfect.
+Main promise karta hoon ki main 
+tumhare har mushkil dinon mein tumhe hold karunga,
+aur khushiyon mein tumhare saath hasunga.
 
-Happy Birthday My Love 💖
+Main tumhare aansu pochunga,
+tumhari jeet celebrate karunga,
+aur tab bhi saath rahunga jab sab kuch
+thoda messy ho jayega.
+
+Main perfection ka promise nahi karta,
+bas honesty,
+effort aur aisa pyaar jo har din tumhe hi choose kare. 💖
 
 Forever yours,
 Priyank`
